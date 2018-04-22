@@ -141,7 +141,7 @@
 <li class="class-method clearfix">
     <div class="method-summary">
         <div class="method-signature">
-            <span class="method-name"><a href="#method-details-callSodiumEncrypt">callSodiumEncrypt</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$nonce64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$message</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
+            <span class="method-name"><a href="#method-details-callSodiumEncrypt">callSodiumEncrypt</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$nonceHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$message</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
             <span class="method-return">
                 &nbsp;<strong>:</strong>&nbsp;
                                     string                            </span>
@@ -158,7 +158,7 @@
 <li class="class-method clearfix">
     <div class="method-summary">
         <div class="method-signature">
-            <span class="method-name"><a href="#method-details-callSodiumDecrypt">callSodiumDecrypt</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$cipherText64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$nonce64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
+            <span class="method-name"><a href="#method-details-callSodiumDecrypt">callSodiumDecrypt</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$ciphertextHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$nonceHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
             <span class="method-return">
                 &nbsp;<strong>:</strong>&nbsp;
                                     void
@@ -193,11 +193,10 @@
 <li class="class-method clearfix">
     <div class="method-summary">
         <div class="method-signature">
-            <span class="method-name"><a href="#method-details-decrypt">decrypt</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$cipherText64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$nonce64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
+            <span class="method-name"><a href="#method-details-decrypt">decrypt</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$ciphertextHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$nonceHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
             <span class="method-return">
                 &nbsp;<strong>:</strong>&nbsp;
-                                    void
-                            </span>
+                                    variable | bool                            </span>
         </div>
                     <div class="method-doc">
                 <div class="summary-text">
@@ -330,7 +329,7 @@
 <li class="class-method clearfix">
     <div class="method-summary">
         <div class="method-signature">
-            <span class="method-name"><a href="#method-details-setSecretKey">setSecretKey</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$encodedKey</span>)
+            <span class="method-name"><a href="#method-details-setSecretKey">setSecretKey</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$keyHex</span>)
             <span class="method-return">
                 &nbsp;<strong>:</strong>&nbsp;
                                     <a href='../../../class/Zodium/AEAD/Cipher.html'>Zodium\AEAD\Cipher</a>                            </span>
@@ -354,7 +353,7 @@
         </div>
                     <div class="method-doc">
                 <div class="summary-text">
-                    Returns the current secret key on the cipher instance.                </div>
+                    Returns the current secret key (hex) on the cipher instance.                </div>
             </div>
             </div>
 </li>
@@ -446,7 +445,7 @@
         <div class="method-details-details">
             <div class="method-signature">
                                     <span class="visibility-protected keyword">protected</span>
-                                <span class="keyword">function</span>&nbsp;<span class="method-name">callSodiumEncrypt</span>(<span class="param-data-type">string</span> <span class="variable param-name">$nonce64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$message</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">callSodiumEncrypt</span>(<span class="param-data-type">string</span> <span class="variable param-name">$nonceHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$message</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
             </div>
             <div class="method-doc">
                                     <div class="summary">
@@ -466,7 +465,7 @@
         <div class="method-details-details">
             <div class="method-signature">
                                     <span class="visibility-protected keyword">protected</span>
-                                <span class="keyword">function</span>&nbsp;<span class="method-name">callSodiumDecrypt</span>(<span class="param-data-type">string</span> <span class="variable param-name">$cipherText64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$nonce64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">callSodiumDecrypt</span>(<span class="param-data-type">string</span> <span class="variable param-name">$ciphertextHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$nonceHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
             </div>
             <div class="method-doc">
                                     <div class="summary">
@@ -506,7 +505,7 @@
         <div class="method-details-details">
             <div class="method-signature">
                                     <span class="visibility-public keyword">public</span>
-                                <span class="keyword">function</span>&nbsp;<span class="method-name">decrypt</span>(<span class="param-data-type">string</span> <span class="variable param-name">$cipherText64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$nonce64</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">decrypt</span>(<span class="param-data-type">string</span> <span class="variable param-name">$ciphertextHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$nonceHex</span>, <span class="param-data-type">string</span> <span class="variable param-name">$ad</span>)
             </div>
             <div class="method-doc">
                                     <div class="summary">
@@ -666,7 +665,7 @@
         <div class="method-details-details">
             <div class="method-signature">
                                     <span class="visibility-public keyword">public</span>
-                                <span class="keyword">function</span>&nbsp;<span class="method-name">setSecretKey</span>(<span class="param-data-type">string</span> <span class="variable param-name">$encodedKey</span>)
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">setSecretKey</span>(<span class="param-data-type">string</span> <span class="variable param-name">$keyHex</span>)
             </div>
             <div class="method-doc">
                                     <div class="summary">
@@ -690,7 +689,7 @@
             </div>
             <div class="method-doc">
                                     <div class="summary">
-                        Returns the current secret key on the cipher instance.                    </div>
+                        Returns the current secret key (hex) on the cipher instance.                    </div>
                     <div class="description">
                                             </div>
                             </div>

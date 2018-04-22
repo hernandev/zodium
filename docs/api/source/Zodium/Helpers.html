@@ -78,12 +78,17 @@
 
 <pre class="zephir-source-file prettyprint linenums">namespace Zodium;
 
+/**
+ * Class Helpers.
+ *
+ * Small helpers for Zodium.
+ */
 class Helpers
 {
     /**
      * Encode a raw value into Base64.
      */
-    public static function toBase64(string value)
+    public static function toBase64(string value) -> string
     {
         return sodium_bin2base64(value, SODIUM_BASE64_VARIANT_ORIGINAL);
     }
@@ -91,7 +96,7 @@ class Helpers
     /**
      * Decode a given value from Base64.
      */
-    public static function fromBase64(string encoded)
+    public static function fromBase64(string encoded) -> string
     {
         return sodium_base642bin(encoded, SODIUM_BASE64_VARIANT_ORIGINAL);
     }
@@ -99,7 +104,7 @@ class Helpers
     /**
      * Encode a raw value into Hexadecimal.
      */
-    public static function toHex(string value)
+    public static function toHex(string value) -> string
     {
         return sodium_bin2hex(value);
     }
@@ -107,7 +112,7 @@ class Helpers
     /**
      * Decode a given value from Hexadecimal.
      */
-    public static function fromHex(string! encoded)
+    public static function fromHex(string! encoded) -> string
     {
         return sodium_hex2bin(encoded);
     }
@@ -115,9 +120,9 @@ class Helpers
     /**
      * Generate a given number of random data.
      */
-    public static function randomBytes(int length)
+    public static function randomBytes(int length) -> string
     {
-        return static::toBase64(random_bytes(length));
+        return static::toHex(random_bytes(length));
     }
 }</pre>                </div>
             </div>

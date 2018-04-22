@@ -122,7 +122,7 @@ class Cipher
     ];
 
     /**
-     * @var null|string Base64 encoded secret key for encryption / decryption.
+     * @var null|string Hexadecimal encoded secret key for encryption / decryption.
      */
     protected secretKey;
 
@@ -152,8 +152,8 @@ class Cipher
      */
     protected function escapeSymbol(string name)
     {
-        // the Base64 decode is temporary, my IDE is not happing with the pattern.
-        return preg_replace(Helpers::fromBase64("L1teQS1aYS16MC05XC1cX10v"), "", name);
+        // the pattern is Hexadecimal encoded to prevent Zephir syntax errors.
+        return preg_replace(Helpers::fromHex("2f5b5e412d5a612d7a302d395c2d5c5f5d2f"), "", name);
     }
 
     /**
@@ -175,14 +175,14 @@ class Cipher
     /**
      * Proxy for the sodium encryption function.
      */
-    protected function callSodiumEncrypt(string nonce64, string message, string ad = null) -> string
+    protected function callSodiumEncrypt(string nonceHex, string message, string ad = null) -> string
     {
         // declare variables.
-        var escapedCipherName, nonce, key, functionName, cipherText;
+        var escapedCipherName, nonce, key, functionName, ciphertext;
 
-        // decode the nonce and the encryption key from Base64.
-        let nonce = Helpers::fromBase64(nonce64);
-        let key = Helpers::fromBase64(this->secretKey);
+        // decode the nonce and the encryption key from Hexadecimal.
+        let nonce = Helpers::fromHex(nonceHex);
+        let key = Helpers::fromHex(this->secretKey);
 
         // escape the cipher name to avoid errors.
         let escapedCipherName = mb_strtolower(this->escapeSymbol(this->cipher));
@@ -191,24 +191,24 @@ class Cipher
         let functionName = "sodium_crypto_aead_".escapedCipherName."_encrypt";
 
         // call the function, passing the parameters.
-        let cipherText = {functionName}(message, ad, nonce, key);
+        let ciphertext = {functionName}(message, ad, nonce, key);
 
         // encode the cipherText and return to the parent function.
-        return Helpers::toBase64(cipherText);
+        return Helpers::toHex(ciphertext);
     }
 
     /**
      * Decryt an encrypt message / payload back to plain text.
      */
-    protected function callSodiumDecrypt(string cipherText64, string nonce64, string ad = null)
+    protected function callSodiumDecrypt(string ciphertextHex, string nonceHex, string ad = null)
     {
         // declare variables.
-        var escapedCipherName, cipherText, nonce, key, functionName;
+        var escapedCipherName, ciphertext, nonce, key, functionName;
 
-        // decode the parameters from Base64.
-        let cipherText = Helpers::fromBase64(cipherText64);
-        let nonce = Helpers::fromBase64(nonce64);
-        let key = Helpers::fromBase64(this->secretKey);
+        // decode the parameters from Hexadecimal.
+        let ciphertext = Helpers::fromHex(ciphertextHex);
+        let nonce = Helpers::fromHex(nonceHex);
+        let key = Helpers::fromHex(this->secretKey);
 
         // escape the cipher name to avoid errors.
         let escapedCipherName = mb_strtolower(this->escapeSymbol(this->cipher));
@@ -217,7 +217,7 @@ class Cipher
         let functionName = "sodium_crypto_aead_".escapedCipherName."_decrypt";
 
         // call the function, using the decoded parameters.
-        return {functionName}(cipherText, ad, nonce, key);
+        return {functionName}(ciphertext, ad, nonce, key);
     }
 
     /**
@@ -226,26 +226,26 @@ class Cipher
     public function encrypt(string message, string ad = null) -> array
     {
         // declare variables.
-        var nonce, cipherText;
+        var nonceHex, ciphertext;
 
-        // generate a base64 encoded nonce to be used for encryption.
-        let nonce = this->generateNonce();
+        // generate a Hexadecimal encoded nonce to be used for encryption.
+        let nonceHex = this->generateNonce();
 
         // encrypt the message and store it's value on the cipher text.
-        let cipherText = this->callSodiumEncrypt(nonce, message, ad);
+        let ciphertext = this->callSodiumEncrypt(nonceHex, message, ad);
 
         // return an array, with all values required to decrypt the cipher text
         // all values except the key of course.
-        return ["ct": cipherText, "nonce": nonce, "ad": ad];
+        return ["ciphertext": ciphertext, "nonce": nonceHex, "ad": ad];
     }
 
     /**
      * Decript a message.
      */
-    public function decrypt(string cipherText64, string nonce64, string ad)
+    public function decrypt(string ciphertextHex, string nonceHex, string ad) -> var | bool
     {
         // call the decryption proxy function.
-        return this->callSodiumDecrypt(cipherText64, nonce64, ad);
+        return this->callSodiumDecrypt(ciphertextHex, nonceHex, ad);
     }
 
     /**
@@ -308,28 +308,28 @@ class Cipher
     /**
      * Secret key setter.
      */
-    public function setSecretKey(string encodedKey) -> <Cipher>
+    public function setSecretKey(string keyHex) -> <Cipher>
     {
         // declare variables.
-        var rawKey;
+        var key;
 
         // decode the secret key from base 64.
-        let rawKey = Helpers::fromBase64(encodedKey);
+        let key = Helpers::fromHex(keyHex);
 
         // check the key length.
-        if (mb_strlen(rawKey, "8bit") != this->keyLength) {
+        if (mb_strlen(key, "8bit") != this->keyLength) {
             throw new Exception("Invalid key size, keys must be ".this->keyLength." long.");
         }
 
-        // set the Base64 encoded key on instance.
-        let this->secretKey = encodedKey;
+        // set the Hexadecimal encoded key on instance.
+        let this->secretKey = keyHex;
 
         // return the cipher instance for fluent setters.
         return this;
     }
 
     /**
-     * Returns the current secret key on the cipher instance.
+     * Returns the current secret key (hex) on the cipher instance.
      */
     public function getSecretKey() -> string
     {
