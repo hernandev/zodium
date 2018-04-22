@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta content="zodium API doc" name="description">
+    <title>
+                    zodium API Documentation
+            </title>
+    <link rel="stylesheet" type="text/css" href="../../asset/static/prettify.css" />
+
+<script src="../../asset/static/prettify.js"></script>
+<script src="../../asset/api_definition.js"></script>
+
+
+                        <link rel="stylesheet" type="text/css" href="../../asset/static/prettify.css" />
+                    <link rel="stylesheet" type="text/css" href="../../asset/static/zephir-theme.css" />
+            
+    
+
+                        <script src="../../asset/static/prettify.js"></script>
+                                    <script src="../../asset/api_definition.js"></script>
+                    <script src="../../asset/static/jquery.min.js"></script>
+                    <script src="../../asset/static/zephir-doc.js"></script>
+                <script>var ZepCurrentPath = '../../'</script>
+    </head>
+ <body onload="prettyPrint()">
+        <div id="top-bar">
+            <div id="top-left">
+                                    zodium Documentation <span class="version">v0.0.1</span>
+                            </div>
+            <div id="top-right">
+            </div>
+        </div>
+        <div id="body">
+            <div id="body-left">
+                <div class="header-search">
+                    <input class="search-box" placeholder="Search for a class or namespace " type="text" />
+                    <div id="menu-wrapper">
+                    </div>
+                </div>
+            </div>
+            <div id="body-right">
+                <div class="content">
+                    
+<div class="breadcrumb">
+    
+    <ul>
+        
+        <li><a href="../../index.html">Home</a></li>
+        
+                <li><a href="../../classes.html">Classes</a></li>
+                <li><a >Zodium\Util</a></li>
+                
+    </ul>
+    
+</div>
+<div class="class-header clearfix">
+    
+    
+    <div class="access-buttons">
+        <a class="zep-button" href="../../source/Zodium/Util.html">Source</a>
+
+            </div>
+    
+    <div class="class-full-name">
+        
+        <span class="class-type">Class</span>
+        
+                <span class="namespace-piece">
+            <a href="../../namespace/Zodium.html">Zodium</a>
+        </span>
+                <h1 class="class-name">Util</h1>
+    </div>
+
+</div>
+
+
+<div class="hidden-anchor"  id="methods"></div>
+<div class="methods-summary standard-bandeau">Methods</div>
+<ul class="method-summary-list">
+    
+        
+<li class="class-method clearfix">
+    <div class="method-summary">
+        <div class="method-signature">
+            <span class="method-name"><a href="#method-details-toBase64">toBase64</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$value</span>)
+            <span class="method-return">
+                &nbsp;<strong>:</strong>&nbsp;
+                                    void
+                            </span>
+        </div>
+                    <div class="method-doc">
+                <div class="summary-text">
+                    Encode a raw value into Base64.                </div>
+            </div>
+            </div>
+</li>
+
+    
+        
+<li class="class-method clearfix">
+    <div class="method-summary">
+        <div class="method-signature">
+            <span class="method-name"><a href="#method-details-fromBase64">fromBase64</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$encoded</span>)
+            <span class="method-return">
+                &nbsp;<strong>:</strong>&nbsp;
+                                    void
+                            </span>
+        </div>
+                    <div class="method-doc">
+                <div class="summary-text">
+                    Decode a given value from Base64.                </div>
+            </div>
+            </div>
+</li>
+
+    
+        
+<li class="class-method clearfix">
+    <div class="method-summary">
+        <div class="method-signature">
+            <span class="method-name"><a href="#method-details-toHex">toHex</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$value</span>)
+            <span class="method-return">
+                &nbsp;<strong>:</strong>&nbsp;
+                                    void
+                            </span>
+        </div>
+                    <div class="method-doc">
+                <div class="summary-text">
+                    Encode a raw value into Hexadecimal.                </div>
+            </div>
+            </div>
+</li>
+
+    
+        
+<li class="class-method clearfix">
+    <div class="method-summary">
+        <div class="method-signature">
+            <span class="method-name"><a href="#method-details-fromHex">fromHex</a></span>(<span class="param-data-type">string</span> <span class="variable param-name">$encoded</span>)
+            <span class="method-return">
+                &nbsp;<strong>:</strong>&nbsp;
+                                    void
+                            </span>
+        </div>
+                    <div class="method-doc">
+                <div class="summary-text">
+                    Decode a given value from Hexadecimal.                </div>
+            </div>
+            </div>
+</li>
+
+    
+        
+<li class="class-method clearfix">
+    <div class="method-summary">
+        <div class="method-signature">
+            <span class="method-name"><a href="#method-details-randomBytes">randomBytes</a></span>(<span class="param-data-type">int</span> <span class="variable param-name">$length</span>)
+            <span class="method-return">
+                &nbsp;<strong>:</strong>&nbsp;
+                                    void
+                            </span>
+        </div>
+                    <div class="method-doc">
+                <div class="summary-text">
+                    Generate a given number of random data.                </div>
+            </div>
+            </div>
+</li>
+
+    </ul>
+
+<div class="hidden-anchor"  id="methods-details"></div>
+<div class="methods-summary standard-bandeau">Methods Details</div>
+<ul class="method-details-list">
+    
+        
+<li class="class-method clearfix">
+    <div class="hidden-anchor" id="method-details-toBase64"></div>
+    <div class="method-details">
+        <div class="method-details-details">
+            <div class="method-signature">
+                                    <span class="visibility-public keyword">public</span>
+                                    <span class="visibility-static keyword">static</span>
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">toBase64</span>(<span class="param-data-type">string</span> <span class="variable param-name">$value</span>)
+            </div>
+            <div class="method-doc">
+                                    <div class="summary">
+                        Encode a raw value into Base64.                    </div>
+                    <div class="description">
+                                            </div>
+                            </div>
+        </div>
+    </div>
+</li>
+
+    
+        
+<li class="class-method clearfix">
+    <div class="hidden-anchor" id="method-details-fromBase64"></div>
+    <div class="method-details">
+        <div class="method-details-details">
+            <div class="method-signature">
+                                    <span class="visibility-public keyword">public</span>
+                                    <span class="visibility-static keyword">static</span>
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">fromBase64</span>(<span class="param-data-type">string</span> <span class="variable param-name">$encoded</span>)
+            </div>
+            <div class="method-doc">
+                                    <div class="summary">
+                        Decode a given value from Base64.                    </div>
+                    <div class="description">
+                                            </div>
+                            </div>
+        </div>
+    </div>
+</li>
+
+    
+        
+<li class="class-method clearfix">
+    <div class="hidden-anchor" id="method-details-toHex"></div>
+    <div class="method-details">
+        <div class="method-details-details">
+            <div class="method-signature">
+                                    <span class="visibility-public keyword">public</span>
+                                    <span class="visibility-static keyword">static</span>
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">toHex</span>(<span class="param-data-type">string</span> <span class="variable param-name">$value</span>)
+            </div>
+            <div class="method-doc">
+                                    <div class="summary">
+                        Encode a raw value into Hexadecimal.                    </div>
+                    <div class="description">
+                                            </div>
+                            </div>
+        </div>
+    </div>
+</li>
+
+    
+        
+<li class="class-method clearfix">
+    <div class="hidden-anchor" id="method-details-fromHex"></div>
+    <div class="method-details">
+        <div class="method-details-details">
+            <div class="method-signature">
+                                    <span class="visibility-public keyword">public</span>
+                                    <span class="visibility-static keyword">static</span>
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">fromHex</span>(<span class="param-data-type">string</span> <span class="variable param-name">$encoded</span>)
+            </div>
+            <div class="method-doc">
+                                    <div class="summary">
+                        Decode a given value from Hexadecimal.                    </div>
+                    <div class="description">
+                                            </div>
+                            </div>
+        </div>
+    </div>
+</li>
+
+    
+        
+<li class="class-method clearfix">
+    <div class="hidden-anchor" id="method-details-randomBytes"></div>
+    <div class="method-details">
+        <div class="method-details-details">
+            <div class="method-signature">
+                                    <span class="visibility-public keyword">public</span>
+                                    <span class="visibility-static keyword">static</span>
+                                <span class="keyword">function</span>&nbsp;<span class="method-name">randomBytes</span>(<span class="param-data-type">int</span> <span class="variable param-name">$length</span>)
+            </div>
+            <div class="method-doc">
+                                    <div class="summary">
+                        Generate a given number of random data.                    </div>
+                    <div class="description">
+                                            </div>
+                            </div>
+        </div>
+    </div>
+</li>
+
+    </ul>                </div>
+            </div>
+        </div>
+    </body>
+</html>
