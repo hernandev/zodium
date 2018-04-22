@@ -35,7 +35,7 @@ class Cipher
     protected $ciphers = array("AES256GCM", "CHACHA20POLY1305", "CHACHA20POLY1305_IETF", "XCHACHA20POLY1305_IETF");
 
     /**
-     * @var null|string Base64 encoded secret key for encryption / decryption.
+     * @var null|string Hexadecimal encoded secret key for encryption / decryption.
      */
     protected $secretKey;
 
@@ -64,21 +64,21 @@ class Cipher
     /**
      * Proxy for the sodium encryption function.
      *
-     * @param string $nonce64
+     * @param string $nonceHex
      * @param string $message
      * @param string $ad
      * @return string
      */
-    protected function callSodiumEncrypt($nonce64, $message, $ad = null) {}
+    protected function callSodiumEncrypt($nonceHex, $message, $ad = null) {}
 
     /**
      * Decryt an encrypt message / payload back to plain text.
      *
-     * @param string $cipherText64
-     * @param string $nonce64
+     * @param string $ciphertextHex
+     * @param string $nonceHex
      * @param string $ad
      */
-    protected function callSodiumDecrypt($cipherText64, $nonce64, $ad = null) {}
+    protected function callSodiumDecrypt($ciphertextHex, $nonceHex, $ad = null) {}
 
     /**
      * Encrypt a given message.
@@ -92,11 +92,12 @@ class Cipher
     /**
      * Decript a message.
      *
-     * @param string $cipherText64
-     * @param string $nonce64
+     * @param string $ciphertextHex
+     * @param string $nonceHex
      * @param string $ad
+     * @return mixed|bool
      */
-    public function decrypt($cipherText64, $nonce64, $ad) {}
+    public function decrypt($ciphertextHex, $nonceHex, $ad) {}
 
     /**
      * Returns a list of the available Ciphers.
@@ -151,13 +152,13 @@ class Cipher
     /**
      * Secret key setter.
      *
-     * @param string $encodedKey
+     * @param string $keyHex
      * @return Cipher
      */
-    public function setSecretKey($encodedKey) {}
+    public function setSecretKey($keyHex) {}
 
     /**
-     * Returns the current secret key on the cipher instance.
+     * Returns the current secret key (hex) on the cipher instance.
      *
      * @return string
      */
