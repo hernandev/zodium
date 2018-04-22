@@ -4,7 +4,7 @@
         "stubs-run-after-generate": false
     },
     "api": {
-        "path": "doc\/%version%",
+        "path": "docs",
         "theme": {
             "name": "zephir",
             "options": {
