@@ -34,14 +34,14 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_zodium_aead_cipher_getsodiumconstant, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zodium_aead_cipher_callsodiumencrypt, 0, 0, 2)
-	ZEND_ARG_INFO(0, nonce64)
+	ZEND_ARG_INFO(0, nonceHex)
 	ZEND_ARG_INFO(0, message)
 	ZEND_ARG_INFO(0, ad)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zodium_aead_cipher_callsodiumdecrypt, 0, 0, 2)
-	ZEND_ARG_INFO(0, cipherText64)
-	ZEND_ARG_INFO(0, nonce64)
+	ZEND_ARG_INFO(0, ciphertextHex)
+	ZEND_ARG_INFO(0, nonceHex)
 	ZEND_ARG_INFO(0, ad)
 ZEND_END_ARG_INFO()
 
@@ -51,13 +51,13 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_zodium_aead_cipher_encrypt, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zodium_aead_cipher_decrypt, 0, 0, 3)
-	ZEND_ARG_INFO(0, cipherText64)
-	ZEND_ARG_INFO(0, nonce64)
+	ZEND_ARG_INFO(0, ciphertextHex)
+	ZEND_ARG_INFO(0, nonceHex)
 	ZEND_ARG_INFO(0, ad)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zodium_aead_cipher_setsecretkey, 0, 0, 1)
-	ZEND_ARG_INFO(0, encodedKey)
+	ZEND_ARG_INFO(0, keyHex)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(zodium_aead_cipher_method_entry) {

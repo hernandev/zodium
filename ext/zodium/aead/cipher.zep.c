@@ -56,7 +56,7 @@ ZEPHIR_INIT_CLASS(Zodium_AEAD_Cipher) {
 	zend_declare_property_null(zodium_aead_cipher_ce, SL("ciphers"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * @var null|string Base64 encoded secret key for encryption / decryption.
+	 * @var null|string Hexadecimal encoded secret key for encryption / decryption.
 	 */
 	zend_declare_property_null(zodium_aead_cipher_ce, SL("secretKey"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
@@ -136,8 +136,8 @@ PHP_METHOD(Zodium_AEAD_Cipher, escapeSymbol) {
 
 
 	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "L1teQS1aYS16MC05XC1cX10v");
-	ZEPHIR_CALL_CE_STATIC(&_0, zodium_helpers_ce, "frombase64", &_1, 0, &_2);
+	ZVAL_STRING(&_2, "2f5b5e412d5a612d7a302d395c2d5c5f5d2f");
+	ZEPHIR_CALL_CE_STATIC(&_0, zodium_helpers_ce, "fromhex", &_1, 0, &_2);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "");
@@ -193,26 +193,26 @@ PHP_METHOD(Zodium_AEAD_Cipher, callSodiumEncrypt) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_0 = NULL, *_4 = NULL;
-	zval *nonce64_param = NULL, *message_param = NULL, *ad_param = NULL, escapedCipherName, nonce, key, functionName, cipherText, _1, _2, _3;
-	zval nonce64, message, ad;
+	zval *nonceHex_param = NULL, *message_param = NULL, *ad_param = NULL, escapedCipherName, nonce, key, functionName, ciphertext, _1, _2, _3;
+	zval nonceHex, message, ad;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&nonce64);
+	ZVAL_UNDEF(&nonceHex);
 	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&ad);
 	ZVAL_UNDEF(&escapedCipherName);
 	ZVAL_UNDEF(&nonce);
 	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&functionName);
-	ZVAL_UNDEF(&cipherText);
+	ZVAL_UNDEF(&ciphertext);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 1, &nonce64_param, &message_param, &ad_param);
+	zephir_fetch_params(1, 2, 1, &nonceHex_param, &message_param, &ad_param);
 
-	zephir_get_strval(&nonce64, nonce64_param);
+	zephir_get_strval(&nonceHex, nonceHex_param);
 	zephir_get_strval(&message, message_param);
 	if (!ad_param) {
 		ZEPHIR_INIT_VAR(&ad);
@@ -222,10 +222,10 @@ PHP_METHOD(Zodium_AEAD_Cipher, callSodiumEncrypt) {
 	}
 
 
-	ZEPHIR_CALL_CE_STATIC(&nonce, zodium_helpers_ce, "frombase64", &_0, 0, &nonce64);
+	ZEPHIR_CALL_CE_STATIC(&nonce, zodium_helpers_ce, "fromhex", &_0, 0, &nonceHex);
 	zephir_check_call_status();
 	zephir_read_property(&_1, this_ptr, SL("secretKey"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_CE_STATIC(&key, zodium_helpers_ce, "frombase64", &_0, 0, &_1);
+	ZEPHIR_CALL_CE_STATIC(&key, zodium_helpers_ce, "fromhex", &_0, 0, &_1);
 	zephir_check_call_status();
 	zephir_read_property(&_3, this_ptr, SL("cipher"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_2, this_ptr, "escapesymbol", NULL, 0, &_3);
@@ -234,9 +234,9 @@ PHP_METHOD(Zodium_AEAD_Cipher, callSodiumEncrypt) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&functionName);
 	ZEPHIR_CONCAT_SVS(&functionName, "sodium_crypto_aead_", &escapedCipherName, "_encrypt");
-	ZEPHIR_CALL_ZVAL_FUNCTION(&cipherText, &functionName, NULL, 0, &message, &ad, &nonce, &key);
+	ZEPHIR_CALL_ZVAL_FUNCTION(&ciphertext, &functionName, NULL, 0, &message, &ad, &nonce, &key);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_CE_STATIC(zodium_helpers_ce, "tobase64", &_4, 0, &cipherText);
+	ZEPHIR_RETURN_CALL_CE_STATIC(zodium_helpers_ce, "tohex", &_4, 0, &ciphertext);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -249,15 +249,15 @@ PHP_METHOD(Zodium_AEAD_Cipher, callSodiumDecrypt) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_0 = NULL;
-	zval *cipherText64_param = NULL, *nonce64_param = NULL, *ad_param = NULL, escapedCipherName, cipherText, nonce, key, functionName, _1, _2, _3;
-	zval cipherText64, nonce64, ad;
+	zval *ciphertextHex_param = NULL, *nonceHex_param = NULL, *ad_param = NULL, escapedCipherName, ciphertext, nonce, key, functionName, _1, _2, _3;
+	zval ciphertextHex, nonceHex, ad;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&cipherText64);
-	ZVAL_UNDEF(&nonce64);
+	ZVAL_UNDEF(&ciphertextHex);
+	ZVAL_UNDEF(&nonceHex);
 	ZVAL_UNDEF(&ad);
 	ZVAL_UNDEF(&escapedCipherName);
-	ZVAL_UNDEF(&cipherText);
+	ZVAL_UNDEF(&ciphertext);
 	ZVAL_UNDEF(&nonce);
 	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&functionName);
@@ -266,10 +266,10 @@ PHP_METHOD(Zodium_AEAD_Cipher, callSodiumDecrypt) {
 	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 1, &cipherText64_param, &nonce64_param, &ad_param);
+	zephir_fetch_params(1, 2, 1, &ciphertextHex_param, &nonceHex_param, &ad_param);
 
-	zephir_get_strval(&cipherText64, cipherText64_param);
-	zephir_get_strval(&nonce64, nonce64_param);
+	zephir_get_strval(&ciphertextHex, ciphertextHex_param);
+	zephir_get_strval(&nonceHex, nonceHex_param);
 	if (!ad_param) {
 		ZEPHIR_INIT_VAR(&ad);
 		ZVAL_STRING(&ad, "");
@@ -278,12 +278,12 @@ PHP_METHOD(Zodium_AEAD_Cipher, callSodiumDecrypt) {
 	}
 
 
-	ZEPHIR_CALL_CE_STATIC(&cipherText, zodium_helpers_ce, "frombase64", &_0, 0, &cipherText64);
+	ZEPHIR_CALL_CE_STATIC(&ciphertext, zodium_helpers_ce, "fromhex", &_0, 0, &ciphertextHex);
 	zephir_check_call_status();
-	ZEPHIR_CALL_CE_STATIC(&nonce, zodium_helpers_ce, "frombase64", &_0, 0, &nonce64);
+	ZEPHIR_CALL_CE_STATIC(&nonce, zodium_helpers_ce, "fromhex", &_0, 0, &nonceHex);
 	zephir_check_call_status();
 	zephir_read_property(&_1, this_ptr, SL("secretKey"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_CE_STATIC(&key, zodium_helpers_ce, "frombase64", &_0, 0, &_1);
+	ZEPHIR_CALL_CE_STATIC(&key, zodium_helpers_ce, "fromhex", &_0, 0, &_1);
 	zephir_check_call_status();
 	zephir_read_property(&_3, this_ptr, SL("cipher"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_2, this_ptr, "escapesymbol", NULL, 0, &_3);
@@ -292,7 +292,7 @@ PHP_METHOD(Zodium_AEAD_Cipher, callSodiumDecrypt) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&functionName);
 	ZEPHIR_CONCAT_SVS(&functionName, "sodium_crypto_aead_", &escapedCipherName, "_decrypt");
-	ZEPHIR_RETURN_CALL_ZVAL_FUNCTION(&functionName, NULL, 0, &cipherText, &ad, &nonce, &key);
+	ZEPHIR_RETURN_CALL_ZVAL_FUNCTION(&functionName, NULL, 0, &ciphertext, &ad, &nonce, &key);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -304,14 +304,14 @@ PHP_METHOD(Zodium_AEAD_Cipher, callSodiumDecrypt) {
 PHP_METHOD(Zodium_AEAD_Cipher, encrypt) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *message_param = NULL, *ad_param = NULL, nonce, cipherText;
+	zval *message_param = NULL, *ad_param = NULL, nonceHex, ciphertext;
 	zval message, ad;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&ad);
-	ZVAL_UNDEF(&nonce);
-	ZVAL_UNDEF(&cipherText);
+	ZVAL_UNDEF(&nonceHex);
+	ZVAL_UNDEF(&ciphertext);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &message_param, &ad_param);
@@ -325,13 +325,13 @@ PHP_METHOD(Zodium_AEAD_Cipher, encrypt) {
 	}
 
 
-	ZEPHIR_CALL_METHOD(&nonce, this_ptr, "generatenonce", NULL, 0);
+	ZEPHIR_CALL_METHOD(&nonceHex, this_ptr, "generatenonce", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&cipherText, this_ptr, "callsodiumencrypt", NULL, 0, &nonce, &message, &ad);
+	ZEPHIR_CALL_METHOD(&ciphertext, this_ptr, "callsodiumencrypt", NULL, 0, &nonceHex, &message, &ad);
 	zephir_check_call_status();
 	zephir_create_array(return_value, 3, 0 TSRMLS_CC);
-	zephir_array_update_string(return_value, SL("ct"), &cipherText, PH_COPY | PH_SEPARATE);
-	zephir_array_update_string(return_value, SL("nonce"), &nonce, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("ciphertext"), &ciphertext, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("nonce"), &nonceHex, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(return_value, SL("ad"), &ad, PH_COPY | PH_SEPARATE);
 	RETURN_MM();
 
@@ -343,23 +343,23 @@ PHP_METHOD(Zodium_AEAD_Cipher, encrypt) {
 PHP_METHOD(Zodium_AEAD_Cipher, decrypt) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *cipherText64_param = NULL, *nonce64_param = NULL, *ad_param = NULL;
-	zval cipherText64, nonce64, ad;
+	zval *ciphertextHex_param = NULL, *nonceHex_param = NULL, *ad_param = NULL;
+	zval ciphertextHex, nonceHex, ad;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&cipherText64);
-	ZVAL_UNDEF(&nonce64);
+	ZVAL_UNDEF(&ciphertextHex);
+	ZVAL_UNDEF(&nonceHex);
 	ZVAL_UNDEF(&ad);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 3, 0, &cipherText64_param, &nonce64_param, &ad_param);
+	zephir_fetch_params(1, 3, 0, &ciphertextHex_param, &nonceHex_param, &ad_param);
 
-	zephir_get_strval(&cipherText64, cipherText64_param);
-	zephir_get_strval(&nonce64, nonce64_param);
+	zephir_get_strval(&ciphertextHex, ciphertextHex_param);
+	zephir_get_strval(&nonceHex, nonceHex_param);
 	zephir_get_strval(&ad, ad_param);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "callsodiumdecrypt", NULL, 0, &cipherText64, &nonce64, &ad);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "callsodiumdecrypt", NULL, 0, &ciphertextHex, &nonceHex, &ad);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -475,12 +475,12 @@ PHP_METHOD(Zodium_AEAD_Cipher, setSecretKey) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_0 = NULL;
-	zval *encodedKey_param = NULL, rawKey, _1, _2, _3, _4$$3, _5$$3, _6$$3;
-	zval encodedKey;
+	zval *keyHex_param = NULL, key, _1, _2, _3, _4$$3, _5$$3, _6$$3;
+	zval keyHex;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&encodedKey);
-	ZVAL_UNDEF(&rawKey);
+	ZVAL_UNDEF(&keyHex);
+	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
@@ -489,16 +489,16 @@ PHP_METHOD(Zodium_AEAD_Cipher, setSecretKey) {
 	ZVAL_UNDEF(&_6$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &encodedKey_param);
+	zephir_fetch_params(1, 1, 0, &keyHex_param);
 
-	zephir_get_strval(&encodedKey, encodedKey_param);
+	zephir_get_strval(&keyHex, keyHex_param);
 
 
-	ZEPHIR_CALL_CE_STATIC(&rawKey, zodium_helpers_ce, "frombase64", &_0, 0, &encodedKey);
+	ZEPHIR_CALL_CE_STATIC(&key, zodium_helpers_ce, "fromhex", &_0, 0, &keyHex);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "8bit");
-	ZEPHIR_CALL_FUNCTION(&_2, "mb_strlen", NULL, 5, &rawKey, &_1);
+	ZEPHIR_CALL_FUNCTION(&_2, "mb_strlen", NULL, 5, &key, &_1);
 	zephir_check_call_status();
 	zephir_read_property(&_3, this_ptr, SL("keyLength"), PH_NOISY_CC | PH_READONLY);
 	if (!ZEPHIR_IS_EQUAL(&_2, &_3)) {
@@ -513,13 +513,13 @@ PHP_METHOD(Zodium_AEAD_Cipher, setSecretKey) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	zephir_update_property_zval(this_ptr, SL("secretKey"), &encodedKey);
+	zephir_update_property_zval(this_ptr, SL("secretKey"), &keyHex);
 	RETURN_THIS();
 
 }
 
 /**
- * Returns the current secret key on the cipher instance.
+ * Returns the current secret key (hex) on the cipher instance.
  */
 PHP_METHOD(Zodium_AEAD_Cipher, getSecretKey) {
 

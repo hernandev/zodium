@@ -19,6 +19,11 @@
 #include "kernel/exception.h"
 
 
+/**
+ * Class Helpers.
+ *
+ * Small helpers for Zodium.
+ */
 ZEPHIR_INIT_CLASS(Zodium_Helpers) {
 
 	ZEPHIR_REGISTER_CLASS(Zodium, Helpers, zodium, helpers, zodium_helpers_method_entry, 0);
@@ -157,7 +162,7 @@ PHP_METHOD(Zodium_Helpers, randomBytes) {
 	ZVAL_LONG(&_0, length);
 	ZEPHIR_CALL_FUNCTION(&_1, "random_bytes", NULL, 11, &_0);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_STATIC("tobase64", NULL, 0, &_1);
+	ZEPHIR_RETURN_CALL_STATIC("tohex", NULL, 0, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 
