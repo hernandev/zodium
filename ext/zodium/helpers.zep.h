@@ -27,6 +27,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_zodium_helpers_randombytes, 0, 0, 1)
 	ZEND_ARG_INFO(0, length)
+	ZEND_ARG_INFO(0, encode)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(zodium_helpers_method_entry) {

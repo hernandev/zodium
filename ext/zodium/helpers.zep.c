@@ -146,25 +146,37 @@ PHP_METHOD(Zodium_Helpers, fromHex) {
  */
 PHP_METHOD(Zodium_Helpers, randomBytes) {
 
-	zval *length_param = NULL, _0, _1;
+	zend_bool encode;
+	zval *length_param = NULL, *encode_param = NULL, randomData, _0, _1;
 	zend_long length, ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&randomData);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &length_param);
+	zephir_fetch_params(1, 1, 1, &length_param, &encode_param);
 
 	length = zephir_get_intval(length_param);
+	if (!encode_param) {
+		encode = 1;
+	} else {
+		encode = zephir_get_boolval(encode_param);
+	}
 
 
 	ZVAL_LONG(&_0, length);
-	ZEPHIR_CALL_FUNCTION(&_1, "random_bytes", NULL, 11, &_0);
+	ZEPHIR_CALL_FUNCTION(&randomData, "random_bytes", NULL, 11, &_0);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_STATIC("tohex", NULL, 0, &_1);
-	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_INIT_VAR(&_1);
+	if (encode) {
+		ZEPHIR_CALL_STATIC(&_1, "tohex", NULL, 0, &randomData);
+		zephir_check_call_status();
+	} else {
+		ZEPHIR_CPY_WRT(&_1, &randomData);
+	}
+	RETURN_CCTOR(&_1);
 
 }
 

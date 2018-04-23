@@ -14,7 +14,7 @@
 #define PHP_ZODIUM_VERSION     "0.0.1"
 #define PHP_ZODIUM_EXTNAME     "zodium"
 #define PHP_ZODIUM_AUTHOR      "Diego Hernandes <diego@hernandev.com>"
-#define PHP_ZODIUM_ZEPVERSION  "0.10.8-70e6efe4c5"
+#define PHP_ZODIUM_ZEPVERSION  "0.9.11-534bd284df"
 #define PHP_ZODIUM_DESCRIPTION "OOP Wrapper for the PHP 7.2+ Sodium Extension (libsodium)"
 
 

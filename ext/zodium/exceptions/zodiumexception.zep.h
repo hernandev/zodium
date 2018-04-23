@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zodium_exceptions_zodiumexception_ce;
+
+ZEPHIR_INIT_CLASS(Zodium_Exceptions_ZodiumException);
+

@@ -46,8 +46,9 @@ class Helpers
      * Generate a given number of random data.
      *
      * @param int $length
+     * @param bool $encode
      * @return string
      */
-    public static function randomBytes($length) {}
+    public static function randomBytes($length, $encode = true) {}
 
 }

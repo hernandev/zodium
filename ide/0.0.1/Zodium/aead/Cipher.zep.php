@@ -10,27 +10,27 @@ namespace Zodium\AEAD;
 class Cipher
 {
     /**
-     * Current cipher name.
+     * @var string Current cipher name.
      */
     protected $cipher;
 
     /**
-     * Private key length.
+     * @var int Private key length.
      */
     protected $keyLength;
 
     /**
-     * Public nonce length.
+     * @bar int Public nonce length.
      */
     protected $nonceLength;
 
     /**
-     * Encrypted MAC length.
+     * @var int Encrypted MAC length.
      */
     protected $macLength;
 
     /**
-     * Available AEAD ciphers.
+     * @var array Available AEAD ciphers.
      */
     protected $ciphers = array("AES256GCM", "CHACHA20POLY1305", "CHACHA20POLY1305_IETF", "XCHACHA20POLY1305_IETF");
 
@@ -51,6 +51,7 @@ class Cipher
      * Scape a string to avoid injection, if at-all possible.
      *
      * @param string $name
+     * @return string
      */
     protected function escapeSymbol($name) {}
 
@@ -58,6 +59,7 @@ class Cipher
      * Wraps all constant lookup for the AEAD ciphers on libsodium.
      *
      * @param string $sodiumConstant
+     * @return mixed|null
      */
     protected function getSodiumConstant($sodiumConstant) {}
 
@@ -67,7 +69,7 @@ class Cipher
      * @param string $nonceHex
      * @param string $message
      * @param string $ad
-     * @return string
+     * @return mixed|bool
      */
     protected function callSodiumEncrypt($nonceHex, $message, $ad = null) {}
 
@@ -77,6 +79,7 @@ class Cipher
      * @param string $ciphertextHex
      * @param string $nonceHex
      * @param string $ad
+     * @return mixed|bool
      */
     protected function callSodiumDecrypt($ciphertextHex, $nonceHex, $ad = null) {}
 
@@ -90,7 +93,7 @@ class Cipher
     public function encrypt($message, $ad = null) {}
 
     /**
-     * Decript a message.
+     * Decrypt a message.
      *
      * @param string $ciphertextHex
      * @param string $nonceHex

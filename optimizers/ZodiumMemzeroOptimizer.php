@@ -8,18 +8,18 @@ use Zephir\CompilationContext;
 use Zephir\CompiledExpression;
 use Zephir\Optimizers\OptimizerAbstract;
 
-class ZodiumZeromemOptimizer extends OptimizerAbstract
+class ZodiumMemzeroOptimizer extends OptimizerAbstract
 {
 
     public function optimize(array $expression, Call $call, CompilationContext $context)
     {
 
         if (!isset($expression['parameters'])) {
-            throw new CompilerException("'calculate_pi' requires one parameter", $expression);
+            throw new CompilerException("'zodium_memzero' requires one parameter", $expression);
         }
 
         if (count($expression['parameters']) > 1) {
-            throw new CompilerException("'calculate_pi' requires one parameter", $expression);
+            throw new CompilerException("'zodium_memzero' requires one parameter", $expression);
         }
 
         /**
@@ -28,13 +28,14 @@ class ZodiumZeromemOptimizer extends OptimizerAbstract
         $call->processExpectedReturn($context);
 
         $symbolVariable = $call->getSymbolVariable();
-        if (!$symbolVariable->isDouble()) {
-            throw new CompilerException("Calculated PI values only can be stored in double variables", $expression);
-        }
+        // throw new \Exception($symbolVariable);
+//        if (!$symbolVariable->isString()) {
+//            throw new CompilerException("The variable to zero should be string", $expression);
+//        }
 
-        $resolvedParams = $call->getReadOnlyResolvedParams($expression['parameters'], $context, $expression);
+        $resolvedParams = $call->getResolvedParams($expression['parameters'], $context, $expression);
 
-        return new CompiledExpression('double', 'my_calculate_pi(' . $resolvedParams[0] . ')', $expression);
+        return new CompiledExpression('char', 'zodium_memzero(' . $resolvedParams[0] . ')', $expression);
     }
 
 }

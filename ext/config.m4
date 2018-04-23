@@ -9,8 +9,14 @@ if test "$PHP_ZODIUM" = "yes"; then
 	fi
 
 	AC_DEFINE(HAVE_ZODIUM, 1, [Whether you have Zodium])
-	zodium_sources="zodium.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c zodium/aead/cipher.zep.c
-	zodium/helpers.zep.c "
+	zodium_sources="zodium.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c zodium/exceptions/zodiumexception.zep.c
+	zodium/aead/cipher.zep.c
+	zodium/exceptions/dataexception.zep.c
+	zodium/exceptions/decryptexception.zep.c
+	zodium/exceptions/encryptexception.zep.c
+	zodium/helpers/helpers.zep.c
+	zodium/secretbox/encryptedpayload.zep.c
+	zodium/secretbox/secretbox.zep.c "
 	PHP_NEW_EXTENSION(zodium, $zodium_sources, $ext_shared,, )
 	PHP_SUBST(ZODIUM_SHARED_LIBADD)
 
