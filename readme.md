@@ -7,46 +7,109 @@ The name **Z**odium is due the fact of this extension being developed with [Zeph
 The original [sodium](https://github.com/jedisct1/libsodium-php) extension is still required, Zodium does not
 bind the C library, this extension is a wrapper for the already existing, non-OOP extension.
 
-## Usage.
+#### Usage:
 
-This library implements most features of `libsodium`.
+The library aims to be really easy to use.
 
-### SecretBox.
+##### Hashing:
 
-The Secret Box is a libsodium API with provides a simple and reliable way for encrypting and decrypting data using
-a shared secret key.
+```php
+<?php
+// alias the GenericHash class.
+use Zodium\Hash\GenericHash;
 
-It means the same key is used both to encrypt and decrypt. This key must remain protected at all costs.
+// start a key-less hasher instance.
+$hasher = new GenericHash();
 
-There is also the Box implementation, which uses public-key encryption, if that's what you are looking for, go ahead
-to the appropriate section.
+// hash a value without a hashing key.
+$hash = $hasher->hash('foo');
+// string(64) "93a0e84a8cdd416626...
 
-Here is an example of usage of the SecretBox.
+// generate a hashing key.
+$key = GenericHash::generateKey();
+// string(64) "62009feb496f0...
 
-To generate a secret key, you must use:
+// start a new hasher with the hashing key.
+$hasher = new GenericHasher($key);
+
+$hash = $hasher->hash('foo');
+// string(64) "714ee3a37cf69bb3aee17...
+
+// start a custom length hash output instance.
+$hasher = new GenericHash($key, 64);
+$hash = $hasher->hash('foo');
+// string(128) "d94315288e268d813e...
+
+// multi-part signature..
+$hasher->add("part1");
+$hasher->add("part2");
+
+// get the final hash from the parts included.
+$hash = $hasher->hash();
+```
+
+##### AEAD:
+
+```php
+<?php
+// aliases.
+use Zodium\AEAD\Cipher;
+
+// start a AEAD cipher instance on the ChaCha20-Poly1305 construction.
+$cipher = new Cipher('CHACHA20POLY1305');
+
+// get a private secret key.
+$cipher->setSecretKey(Cipher::generateSecretKey());
+
+// encrypt the secret data with some associated public data.
+$encryptedPayload = $cipher->encrypt('message', 'associated-data');
+
+// decrypt the original message from the payload.
+$original = $cipher->decrypt($encryptedPayload);
+```
+
+##### SecretBox:
 
 ```php
 <?php
 
-// alias the Zodium classes that will be used.
+// aliases.
 use Zodium\SecretBox\SecretBox;
 use Zodium\SecretBox\EncryptedPayload;
 
-// generate a new secret key. It will be hexadecimal encoded.
+// generate a secret key for use with the SecretBox.
 $key = SecretBox::generateSecretKey();
 
-var_dump($key);
-$secretBox = new SecretBox($key);
+// start a SecretBox instance.
+$box = new SecretBox($key);
 
-$someArray = [1, 2, 3];
-$someString = 'This is a message.';
-$someObject = new \Datetime('2018-02-11T15:03:01.012345Z');
+// encrypt some data, and receive a EncryptPayload instance as return.
+$payload = $box->encrypt('some-data-as-string');
 
-$payload1 = $secretBox->encrypt($someData1);
-$payload2 = $secretBox->encrypt($someData2);
-$payload3 = $secretBox->encrypt($someData3);
+// encode the payload for transmission or storage:
+$payloadString = $payload->encode();
 
-var_dump($payload1);
-var_dump($payload2);
-var_dump($payload3);
+// reverse the payload from string into instance.
+$payload = EncryptedPayload::decode($payloadString);
+
+// decrypt.
+$originalData = $box->decrypt($payload);
+
+// extras:
+// you can encrypt any serializable value on PHP.
+$payload = $box->encrypt(new Datetime());
+// the value will be unserialized back on the original type!.
+$dateTimeInstance = $box->decrypt($payload);
+
 ```
+
+#### Roadmap:
+
+Current features to be included are:
+
+- Constant-time helpers and safe evaluation of sensitive values.
+- Public-key Encryption.
+- Stand-alone message authentication.
+- Bind Zephir optimizers to calls on the libsodium directly.
+- Documentation
+- .phpt tests.
