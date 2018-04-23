@@ -121,17 +121,17 @@ PHP_METHOD(Zodium_SecretBox_SecretBox, encrypt) {
 	if (zephir_is_scalar(message)) {
 		ZEPHIR_CPY_WRT(&prepared, message);
 	} else {
-		ZEPHIR_CALL_FUNCTION(&prepared, "serialize", NULL, 17, message);
+		ZEPHIR_CALL_FUNCTION(&prepared, "serialize", NULL, 21, message);
 		zephir_check_call_status();
 	}
 	ZVAL_BOOL(&_0, 0);
 	ZEPHIR_CALL_METHOD(&nonce, this_ptr, "generatenonce", NULL, 0, &_0);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("secretKey"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_FUNCTION(&ciphertext, "sodium_crypto_secretbox", NULL, 18, &prepared, &nonce, &_0);
+	ZEPHIR_CALL_FUNCTION(&ciphertext, "sodium_crypto_secretbox", NULL, 22, &prepared, &nonce, &_0);
 	zephir_check_call_status();
 	object_init_ex(return_value, zodium_secretbox_encryptedpayload_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 16, &ciphertext, &nonce, &scalar);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 20, &ciphertext, &nonce, &scalar);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -168,7 +168,7 @@ PHP_METHOD(Zodium_SecretBox_SecretBox, decrypt) {
 	ZEPHIR_CALL_METHOD(&nonce, encryptedPayload, "getnonce", NULL, 0, &_0);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("secretKey"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_FUNCTION(&prepared, "sodium_crypto_secretbox_open", NULL, 19, &ciphertext, &nonce, &_0);
+	ZEPHIR_CALL_FUNCTION(&prepared, "sodium_crypto_secretbox_open", NULL, 23, &ciphertext, &nonce, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_CALL_METHOD(&_2, encryptedPayload, "isscalar", NULL, 0);
@@ -176,7 +176,7 @@ PHP_METHOD(Zodium_SecretBox_SecretBox, decrypt) {
 	if (zephir_is_true(&_2)) {
 		ZEPHIR_CPY_WRT(&_1, &prepared);
 	} else {
-		ZEPHIR_CALL_FUNCTION(&_1, "unserialize", NULL, 20, &prepared);
+		ZEPHIR_CALL_FUNCTION(&_1, "unserialize", NULL, 24, &prepared);
 		zephir_check_call_status();
 	}
 	RETURN_CCTOR(&_1);

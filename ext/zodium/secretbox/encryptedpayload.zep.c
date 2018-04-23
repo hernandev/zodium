@@ -332,7 +332,7 @@ PHP_METHOD(Zodium_SecretBox_EncryptedPayload, decode) {
 			object_init_ex(&_5$$6, zodium_exceptions_dataexception_ce);
 			ZEPHIR_INIT_LNVAR(_6$$6);
 			ZEPHIR_CONCAT_SVS(&_6$$6, "Payload is missing the ", &item, " key.");
-			ZEPHIR_CALL_METHOD(NULL, &_5$$6, "__construct", &_7, 15, &_6$$6);
+			ZEPHIR_CALL_METHOD(NULL, &_5$$6, "__construct", &_7, 11, &_6$$6);
 			zephir_check_call_status();
 			zephir_throw_exception_debug(&_5$$6, "zodium/SecretBox/EncryptedPayload.zep", 130 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
@@ -354,7 +354,7 @@ PHP_METHOD(Zodium_SecretBox_EncryptedPayload, decode) {
 	zephir_array_fetch_string(&_11, &data, SL("ciphertext"), PH_NOISY | PH_READONLY, "zodium/SecretBox/EncryptedPayload.zep", 138 TSRMLS_CC);
 	zephir_array_fetch_string(&_12, &data, SL("nonce"), PH_NOISY | PH_READONLY, "zodium/SecretBox/EncryptedPayload.zep", 138 TSRMLS_CC);
 	zephir_array_fetch_string(&_13, &data, SL("scalar"), PH_NOISY | PH_READONLY, "zodium/SecretBox/EncryptedPayload.zep", 138 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 16, &_11, &_12, &_13);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 20, &_11, &_12, &_13);
 	zephir_check_call_status();
 	RETURN_MM();
 

@@ -10,8 +10,9 @@ if (PHP_ZODIUM != "no") {
     AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
   }
   
-  ADD_SOURCES(configure_module_dirname + "/zodium/exceptions", "zodiumexception.zep.c dataexception.zep.c decryptexception.zep.c encryptexception.zep.c", "zodium");
+  ADD_SOURCES(configure_module_dirname + "/zodium/exceptions", "zodiumexception.zep.c dataexception.zep.c decryptexception.zep.c encryptexception.zep.c hashexception.zep.c", "zodium");
 	ADD_SOURCES(configure_module_dirname + "/zodium/aead", "cipher.zep.c", "zodium");
+	ADD_SOURCES(configure_module_dirname + "/zodium/hash", "generichash.zep.c", "zodium");
 	ADD_SOURCES(configure_module_dirname + "/zodium/helpers", "helpers.zep.c", "zodium");
 	ADD_SOURCES(configure_module_dirname + "/zodium/secretbox", "encryptedpayload.zep.c secretbox.zep.c", "zodium");
   ADD_FLAG("CFLAGS_ZODIUM", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");

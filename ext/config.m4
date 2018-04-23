@@ -14,6 +14,8 @@ if test "$PHP_ZODIUM" = "yes"; then
 	zodium/exceptions/dataexception.zep.c
 	zodium/exceptions/decryptexception.zep.c
 	zodium/exceptions/encryptexception.zep.c
+	zodium/exceptions/hashexception.zep.c
+	zodium/hash/generichash.zep.c
 	zodium/helpers/helpers.zep.c
 	zodium/secretbox/encryptedpayload.zep.c
 	zodium/secretbox/secretbox.zep.c "

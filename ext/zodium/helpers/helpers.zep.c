@@ -55,7 +55,7 @@ PHP_METHOD(Zodium_Helpers_Helpers, compare) {
 	zephir_get_strval(&b, b_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "sodium_compare", NULL, 7, &a, &b);
+	ZEPHIR_CALL_FUNCTION(&_0, "sodium_compare", NULL, 12, &a, &b);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(ZEPHIR_IS_LONG_IDENTICAL(&_0, 0));
 
@@ -81,7 +81,7 @@ PHP_METHOD(Zodium_Helpers_Helpers, compareMemory) {
 
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "sodium_memcmp", NULL, 8, a, b);
+	ZEPHIR_CALL_FUNCTION(&_0, "sodium_memcmp", NULL, 13, a, b);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(ZEPHIR_IS_LONG_IDENTICAL(&_0, 0));
 
@@ -111,7 +111,7 @@ PHP_METHOD(Zodium_Helpers_Helpers, increment) {
 	ZEPHIR_CALL_STATIC(&value, "fromhex", NULL, 0, &valueHex);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(&value);
-	ZEPHIR_CALL_FUNCTION(NULL, "sodium_increment", NULL, 9, &value);
+	ZEPHIR_CALL_FUNCTION(NULL, "sodium_increment", NULL, 14, &value);
 	ZEPHIR_UNREF(&value);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_STATIC("tohex", NULL, 0, &value);
@@ -142,7 +142,7 @@ PHP_METHOD(Zodium_Helpers_Helpers, toBase64) {
 
 
 	ZVAL_LONG(&_0, 1);
-	ZEPHIR_RETURN_CALL_FUNCTION("sodium_bin2base64", NULL, 10, &value, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("sodium_bin2base64", NULL, 15, &value, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -170,7 +170,7 @@ PHP_METHOD(Zodium_Helpers_Helpers, fromBase64) {
 
 
 	ZVAL_LONG(&_0, 1);
-	ZEPHIR_RETURN_CALL_FUNCTION("sodium_base642bin", NULL, 11, &encoded, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("sodium_base642bin", NULL, 16, &encoded, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -196,7 +196,7 @@ PHP_METHOD(Zodium_Helpers_Helpers, toHex) {
 	zephir_get_strval(&value, value_param);
 
 
-	ZEPHIR_RETURN_CALL_FUNCTION("sodium_bin2hex", NULL, 12, &value);
+	ZEPHIR_RETURN_CALL_FUNCTION("sodium_bin2hex", NULL, 17, &value);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -231,7 +231,7 @@ PHP_METHOD(Zodium_Helpers_Helpers, fromHex) {
 	}
 
 
-	ZEPHIR_RETURN_CALL_FUNCTION("sodium_hex2bin", NULL, 13, &encoded);
+	ZEPHIR_RETURN_CALL_FUNCTION("sodium_hex2bin", NULL, 18, &encoded);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -265,7 +265,7 @@ PHP_METHOD(Zodium_Helpers_Helpers, randomBytes) {
 
 
 	ZVAL_LONG(&_0, length);
-	ZEPHIR_CALL_FUNCTION(&randomData, "random_bytes", NULL, 14, &_0);
+	ZEPHIR_CALL_FUNCTION(&randomData, "random_bytes", NULL, 19, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_1);
 	if (encode) {

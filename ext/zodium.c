@@ -28,6 +28,8 @@ zend_class_entry *zodium_aead_cipher_ce;
 zend_class_entry *zodium_exceptions_dataexception_ce;
 zend_class_entry *zodium_exceptions_decryptexception_ce;
 zend_class_entry *zodium_exceptions_encryptexception_ce;
+zend_class_entry *zodium_exceptions_hashexception_ce;
+zend_class_entry *zodium_hash_generichash_ce;
 zend_class_entry *zodium_helpers_helpers_ce;
 zend_class_entry *zodium_secretbox_encryptedpayload_ce;
 zend_class_entry *zodium_secretbox_secretbox_ce;
@@ -47,6 +49,8 @@ static PHP_MINIT_FUNCTION(zodium)
 	ZEPHIR_INIT(Zodium_Exceptions_DataException);
 	ZEPHIR_INIT(Zodium_Exceptions_DecryptException);
 	ZEPHIR_INIT(Zodium_Exceptions_EncryptException);
+	ZEPHIR_INIT(Zodium_Exceptions_HashException);
+	ZEPHIR_INIT(Zodium_Hash_GenericHash);
 	ZEPHIR_INIT(Zodium_Helpers_Helpers);
 	ZEPHIR_INIT(Zodium_SecretBox_EncryptedPayload);
 	ZEPHIR_INIT(Zodium_SecretBox_SecretBox);
