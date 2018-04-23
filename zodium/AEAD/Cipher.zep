@@ -1,7 +1,7 @@
 namespace Zodium\AEAD;
 
 use Exception;
-use Zodium\Helpers;
+use Zodium\Helpers\Helpers;
 
 /**
  * Class AEAD.
@@ -11,27 +11,27 @@ use Zodium\Helpers;
 class Cipher
 {
     /**
-     * Current cipher name.
+     * @var string Current cipher name.
      */
     protected cipher;
 
     /**
-     * Private key length.
+     * @var int Private key length.
      */
     protected keyLength;
 
     /**
-     * Public nonce length.
+     * @bar int Public nonce length.
      */
     protected nonceLength;
 
     /**
-     * Encrypted MAC length.
+     * @var int Encrypted MAC length.
      */
     protected macLength;
 
     /**
-     * Available AEAD ciphers.
+     * @var array Available AEAD ciphers.
      */
     protected ciphers = [
         "AES256GCM",
@@ -69,7 +69,7 @@ class Cipher
     /**
      * Scape a string to avoid injection, if at-all possible.
      */
-    protected function escapeSymbol(string name)
+    protected function escapeSymbol(string name) -> string
     {
         // the pattern is Hexadecimal encoded to prevent Zephir syntax errors.
         return preg_replace(Helpers::fromHex("2f5b5e412d5a612d7a302d395c2d5c5f5d2f"), "", name);
@@ -78,7 +78,7 @@ class Cipher
     /**
      * Wraps all constant lookup for the AEAD ciphers on libsodium.
      */
-    protected function getSodiumConstant(string sodiumConstant)
+    protected function getSodiumConstant(string sodiumConstant) -> var | null
     {
         // declare variables.
         var escapedCipher, escapedConstant;
@@ -94,7 +94,7 @@ class Cipher
     /**
      * Proxy for the sodium encryption function.
      */
-    protected function callSodiumEncrypt(string nonceHex, string message, string ad = null) -> string
+    protected function callSodiumEncrypt(string nonceHex, string message, string ad = null) -> var | bool
     {
         // declare variables.
         var escapedCipherName, nonce, key, functionName, ciphertext;
@@ -119,7 +119,7 @@ class Cipher
     /**
      * Decryt an encrypt message / payload back to plain text.
      */
-    protected function callSodiumDecrypt(string ciphertextHex, string nonceHex, string ad = null)
+    protected function callSodiumDecrypt(string ciphertextHex, string nonceHex, string ad = null) -> var | bool
     {
         // declare variables.
         var escapedCipherName, ciphertext, nonce, key, functionName;
@@ -159,7 +159,7 @@ class Cipher
     }
 
     /**
-     * Decript a message.
+     * Decrypt a message.
      */
     public function decrypt(string ciphertextHex, string nonceHex, string ad) -> var | bool
     {
